@@ -8,19 +8,20 @@ public class Main extends Plugin{
 
     @Override
     public void onEnable(){
-        this.initEvents();
+        this.saveResource("config.yml");
+        initEvents();
     }
 
     private void initEvents(){
-        this.getProxy().getEventManager().subscribe(ProxyPingEvent.class, Main::onPing);
-        this.getProxy().getEventManager().subscribe(ProxyQueryEvent.class, Main::onQuery);
+        this.getProxy().getEventManager().subscribe(ProxyPingEvent.class, this::onPing);
+        this.getProxy().getEventManager().subscribe(ProxyQueryEvent.class, this::onQuery);
     }
 
-    public static void onPing(ProxyPingEvent event){
-        event.setMaximumPlayerCount(event.getPlayerCount() + 1);
+    public void onPing(ProxyPingEvent event){
+        event.setMaximumPlayerCount(event.getPlayerCount() + this.getConfig().getInt("max-slots"));
     }
 
-    public static void onQuery(ProxyQueryEvent event){
-        event.setMaximumPlayerCount(event.getPlayerCount() + 1);
+    public void onQuery(ProxyQueryEvent event){
+        event.setMaximumPlayerCount(event.getPlayerCount() + this.getConfig().getInt("max-slots"));
     }
 }
