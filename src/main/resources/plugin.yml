@@ -1,4 +1,5 @@
 name: PlusOneSlot
 author: KyaaFira
 main: me.kyaafira.plusoneslot.Main
-version: 2.0.0
+api: 2.0.0
+version: 2.1.0
